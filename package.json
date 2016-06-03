@@ -1,0 +1,16 @@
+{
+  "name": "hades-bot",
+  "version": "1.0.0",
+  "description": "Used in discord group chats",
+  "main": "bot.js",
+  "dependencies": {
+    "discord.js": "^7.0.1",
+    "npm": "^2.15.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
