@@ -8,9 +8,7 @@ var bot = new Discord.Client();
 
 function Init() {
     var cfg = JSON.parse(fs.readFileSync(appDir + "/Config/config.json", "utf8"));
-        console.log(appDir)
-        console.log("CFG Read!");
-        console.log(cfg)
+    
     bot.login(cfg[0], cfg[1]);
 }
 
