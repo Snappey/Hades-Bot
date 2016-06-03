@@ -41,6 +41,8 @@ function loadPlugins() {
     console.log("|- Modules Finished Loading!");
     console.log("|- Time Taken " + (os.uptime() - timestarted).toFixed(2) + "ms");
     console.log("|-----")
+
+    console.log(plugins["chat"]["commands"])
 }
 
 function executeChatCommand(string) {
@@ -48,9 +50,14 @@ function executeChatCommand(string) {
     if (string.indexOf(" ") > 0) { // Arguments included
         var cmd = string.substring(0, string.indexOf(" "));
         var args = string.substring(string.indexOf(" ") + 1, string.length).split(" ");
+
+        if (plugins["chat"]["commands"][cmd] == null) { return; }
+        console.log("running command " + cmd)
+        
         res = plugins["chat"]["commands"][cmd].execute(args[0], args[1], args[2], args[3], args[4], args[5]);
     }
     else {
+        if (plugins["chat"]["commands"][string] == null) { return; }
         res = plugins["chat"]["commands"][string].execute();
     }
     return res;   
@@ -62,7 +69,7 @@ bot.on("ready", function() {
 
 var _prfx = []; _prfx["/"] = true; _prfx["!"] = true; _prfx["~"] = true; // TODO: Make them configurable from the client
 bot.on("message", function(message) {
-    if (message.sender.username == "HadesBot") { return; } // TODO: Get the nickname instead of harcoding
+    if (message.sender.username == bot.user.username) { return; }
     if (_prfx[message.content.substring(0,1)] == true) {
         var msg = executeChatCommand( message.content.substring( 1, message.content.length ) );
         if (msg != null || msg != "") {
