@@ -5,7 +5,7 @@ var os = require("os");
 var path = require('path');
 var appDir = path.dirname(require.main.filename); // TODO: Remove this horrible workaround for me messing up the require system
 
-var bot = new Discord.Client();
+GLOBAL.bot = new Discord.Client();
 var plugins = [] // All loaded plugins are stored in the array
 
 function Init() {
