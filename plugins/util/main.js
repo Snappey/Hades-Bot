@@ -29,3 +29,7 @@ chat.Add("purge", 1, function(msgcount) {
 		};
 	});
 })
+
+chat.Add("github", 0, function() {
+	return "https://github.com/Snappey/Hades-Bot";
+})
