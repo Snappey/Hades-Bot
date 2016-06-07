@@ -7,7 +7,7 @@ var appDir = path.dirname(require.main.filename);
 
 var chat = require( appDir + "/plugins/chat/main.js");
 
-chat.Add("Ping", "No Args", function() {
+chat.Add("Ping", 0, function() {
 	return "pong";
 })
 
