@@ -5,7 +5,13 @@ var exec = require('child_process').exec;
 
 var chat = require( appDir + "/plugins/chat/main.js");
 
-chat.Add("pull'n'deploy", 0, function() {
+chat.Add("pullndeploy", 0, function() {
 	console.log("I'll be right back!");
-	exec("/root/deploy.sh");
+	exec("/root/deploy.sh", function(err,stdout,stdin) {
+		console.log("stdout: " + stdout);
+		console.log("stdin: " + stdin);
+		if (err !==  null) {
+			console.log("error: " + err);
+		}
+	});
 })
