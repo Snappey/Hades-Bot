@@ -5,6 +5,7 @@ var appDir = path.dirname(require.main.filename);
 var chat = require( appDir + "/plugins/chat/main.js");
 
 var prefixes = [];
+ initPrefixes();
  loadPrefixes();
 
 chat.Add("prefix", "prefix <add,remove,list> <prefix>", function(opt, prefix) {
@@ -18,7 +19,7 @@ chat.Add("prefix", "prefix <add,remove,list> <prefix>", function(opt, prefix) {
 		if (prefix != "" || prefix != null) {
 			if (prefixes[prefix] != null) {
 				prefixes[prefix] = false
-				return "Prefix '" + prefix+ "' was removed from datbase!";
+				return "Prefix '" + prefix+ "' was removed from database!";
 			}
 			else
 			{
@@ -42,6 +43,14 @@ chat.Add("prefix", "prefix <add,remove,list> <prefix>", function(opt, prefix) {
 		return "Prefixes have been loaded from Database!";
 	}
 })
+
+
+function initPrefixes() {
+	if (fs.existsSync("./plugins/prefix/prefix.json") == false) {
+		fs.writeFileSync("./plugins/prefix/prefix.json", "[\"/\",true,\"!\",true]")
+		console.log("|---- Created prefix.json");
+	}
+}
 
 function loadPrefixes() {
 	var res = fs.readFileSync("./plugins/prefix/prefix.json");
