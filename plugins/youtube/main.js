@@ -8,6 +8,7 @@ var chat = require( appDir + "/plugins/chat/main.js");
 
 var yt_opts = {
 	host: "https://www.googleapis.com",
+	path: "/youtube/v3/search?part=snippet&maxResults=10&key=<your api key>&q="
 }
 
 function Search(str) {
