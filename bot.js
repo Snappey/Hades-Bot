@@ -41,20 +41,26 @@ function loadPlugins() {
     console.log("|- Modules Finished Loading!");
     console.log("|- Time Taken " + (os.uptime() - timestarted).toFixed(2) + "ms");
     console.log("|-----")
-
-    console.log(plugins["chat"]["commands"])
 }
 
 function executeChatCommand(string) {
     var res;
     if (string.indexOf(" ") > 0) { // Arguments included
         var cmd = string.substring(0, string.indexOf(" "));
-        var args = string.substring(string.indexOf(" ") + 1, string.length).split(" ");
 
         if (plugins["chat"]["commands"][cmd] == null) { return; }
-        console.log("running command " + cmd)
-        
-        res = plugins["chat"]["commands"][cmd].execute(args[0], args[1], args[2], args[3], args[4], args[5]);
+
+        var args;
+        if (plugins["chat"]["commands"][cmd]["args"] == 1) {
+            args = string.substring(string.indexOf(" ") + 1, string.length);
+
+            res = plugins["chat"]["commands"][cmd].execute(args);
+        } else
+        {
+            args = string.substring(string.indexOf(" ") + 1, string.length).split(" ");
+            
+            res = plugins["chat"]["commands"][cmd].execute(args[0], args[1], args[2], args[3], args[4], args[5]);
+        }
     }
     else {
         if (plugins["chat"]["commands"][string] == null) { return; }
