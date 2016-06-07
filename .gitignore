@@ -1,2 +1,3 @@
 config/config.json
 plugins/prefix/prefix.json
+node_modules/*
