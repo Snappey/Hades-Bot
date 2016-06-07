@@ -9,11 +9,13 @@ GLOBAL.bot = new Discord.Client();
 var plugins = [] // All loaded plugins are stored in the array
 
 function Init() {
-    var cfg = JSON.parse(fs.readFileSync(appDir + "/Config/config.json", "utf8"));
+    var cfg = JSON.parse(fs.readFileSync(appDir + "/config/config.json", "utf8"));
 
         loadPlugins();
 
-    bot.login(cfg[0], cfg[1]);
+    bot.login(cfg[0], cfg[1], function(err, tkn) {
+        console.log(err, tkn);
+    });
 }
 
 function loadPlugins() {
