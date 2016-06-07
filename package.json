@@ -5,7 +5,8 @@
   "main": "bot.js",
   "dependencies": {
     "discord.js": "^7.0.1",
-    "npm": "^2.15.5"
+    "npm": "^2.15.5",
+    "sync-request":  "^3.0.1"
   },
   "devDependencies": {},
   "scripts": {
