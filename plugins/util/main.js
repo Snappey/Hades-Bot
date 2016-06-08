@@ -33,3 +33,14 @@ chat.Add("purge", 1, function(msgcount) {
 chat.Add("github", 0, function() {
 	return "https://github.com/Snappey/Hades-Bot";
 })
+
+chat.Add("tts", 1, function(str) {
+	if (str == "on") {
+		bot.ctts= true;
+		return "CBot TTS: On";
+	} else if (str == "off") {
+		bot.ctts = false;
+		return "CBOT_TTS: Off";
+	};
+	return "CBOT_TTS: " + bot.ctts;
+})

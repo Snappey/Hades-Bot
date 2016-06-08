@@ -1,11 +1,14 @@
 var Discord = require("discord.js");
 var fs = require("fs");
 var os = require("os");
+var Cleverbot = require("cleverbot-node");
 
 var path = require('path');
 var appDir = path.dirname(require.main.filename); // TODO: Remove this horrible workaround for me messing up the require system
 
-GLOBAL.bot = new Discord.Client();
+GLOBAL.bot = new Discord.Client(); 
+bot.ctts = false;
+GLOBAL.cleverbot = new Cleverbot;
 var plugins = [] // All loaded plugins are stored in the array
 
 function Init() {
@@ -82,6 +85,16 @@ bot.on("message", function(message) {
         var msg = executeChatCommand( message.content.substring( 1, message.content.length ) );
         if (msg != null || msg != "") {
             bot.sendMessage(message, msg);
+        }
+    }
+    else {
+        var chance = (Math.random() * 10);
+        if (chance > 9 || (message.mentions[0] != null && message.mentions[0].username == bot.user.username && message.content != " ")) {
+            Cleverbot.prepare(function(){
+              cleverbot.write(message.content, function (response) {
+                   bot.sendMessage(message, response.message, {tts: bot.ctts});
+              });
+            });
         }
     }
 });
