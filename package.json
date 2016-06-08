@@ -6,7 +6,10 @@
   "dependencies": {
     "discord.js": "^7.0.1",
     "npm": "^2.15.5",
-    "sync-request":  "^3.0.1"
+    "sync-request": "^3.0.1",
+    "cleverbot-node":  "^0.2.2",
+    "node-schedule": "^1.1.0",
+    "xml2js": "^0.4.16"
   },
   "devDependencies": {},
   "scripts": {
