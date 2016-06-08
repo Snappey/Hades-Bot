@@ -76,7 +76,7 @@ function executeChatCommand(string) {
 
 bot.on("ready", function() {
     console.log("Bot is Ready to use!");
-    bot.sendMessage("Whats Up!");
+    bot.sendMessage(bot.channels[0], "Whats Up!");
 });
 
 var _prfx = []; _prfx["/"] = true; _prfx["!"] = true; _prfx["~"] = true; // TODO: Make them configurable from the client
