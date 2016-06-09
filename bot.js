@@ -60,8 +60,7 @@ function executeChatCommand(string) {
             args = string.substring(string.indexOf(" ") + 1, string.length);
 
             res = plugins["chat"]["commands"][cmd].execute(args);
-        } else
-        {
+        }  else {
             args = string.substring(string.indexOf(" ") + 1, string.length).split(" ");
             
             res = plugins["chat"]["commands"][cmd].execute(args[0], args[1], args[2], args[3], args[4], args[5]);
@@ -76,7 +75,7 @@ function executeChatCommand(string) {
 
 bot.on("ready", function() {
     console.log("Bot is Ready to use!");
-    bot.sendMessage(bot.channels[0], "Whats Up!");
+   bot.sendMessage(bot.channels[0], "Whats Up!");
 });
 
 var _prfx = []; _prfx["/"] = true; _prfx["!"] = true; _prfx["~"] = true; // TODO: Make them configurable from the client
