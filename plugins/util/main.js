@@ -1,4 +1,4 @@
-
+var fs = require("fs")
 var path = require('path');
 var appDir = path.dirname(require.main.filename);
 
@@ -43,4 +43,43 @@ chat.Add("tts", 1, function(str) {
 		return "CBOT_TTS: Off";
 	};
 	return "CBOT_TTS: " + bot.ctts;
+})
+
+chat.Add("help", 1, function(cmd) {
+	if (cmd == null || cmd == "") {
+		var str = "List of usable commands:";
+		for(var k in chat.commands) {
+			str += "\n\t" + k + ",";
+		}
+		str += "\n End of usable commands"
+		return str 
+	}
+	else {
+		for (var k in chat.commands) {
+			if (k == cmd) {
+				return "Command: " + k + " is usable!";
+			}
+		}
+		return "Command: " + cmd + " was not found!";
+	}
+})
+
+chat.Add("plugins", 1, function(plugin) {
+	var pluginDirs = fs.readdirSync(appDir  + "/plugins/");
+	if (plugin == null || plugin == "") {
+		var str = "List of installed plugins:";
+		for(var i=0; i < pluginDirs.length; i++) {
+			str += "\n\t" + pluginDirs[i] + ",";
+		}
+		str += "\n End of installed plugins"
+		return str
+	} 
+	else {
+		for(var i=0; i < pluginDirs.length; i++) {
+			if (pluginDirs[i] == plugin) {
+				return "Plugin: " + pluginDirs[i] + " is installed!";
+			}
+		}
+		return "Plugin: " + plugin + " is not installed!";
+	}
 })
