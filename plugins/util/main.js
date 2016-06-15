@@ -83,3 +83,8 @@ chat.Add("plugins", 1, function(plugin) {
 		return "Plugin: " + plugin + " is not installed!";
 	}
 })
+
+chat.Add("status", 1, function(status) {
+	if (status == null || status == "") { return; }
+	bot.setStatus("active", status);
+})
