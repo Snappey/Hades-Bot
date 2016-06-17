@@ -14,10 +14,16 @@ chat.Add("leave-voice", 0, function() {
 })
 
 chat.Add("play", 1, function(uri) {
-	console.log(uri != null, cntcn != null);
-	console.log(cntcn.playing, cntcn.server)
+	console.log(cntcn != null);
 	//if (cntcn != null && uri != null && uri != "") {return;}
-	cntcn.setSpeaking(true);
-	cntcn.playFile("F:\\rhcp.wav")
+	cntcn.playRawStream("http://82.36.154.13:8000/live", {}, function(a,b,c) {
+			console.log(a)
+			console.log(a.isPaused());
+			a.resume();
+			console.log(a.isPaused());
+			a.error = function(err) {
+				console.log(err);
+			}
+	})
 
 })
