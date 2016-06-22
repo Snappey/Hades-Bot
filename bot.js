@@ -74,7 +74,7 @@ function executeChatCommand(string) {
 }
 
 bot.on("ready", function() {
-    console.log("Bot is Ready to use!");
+    //console.log("Bot is Ready to use!");
    bot.sendMessage(bot.channels[0], "Whats Up!");
 });
 
