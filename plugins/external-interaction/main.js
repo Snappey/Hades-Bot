@@ -7,28 +7,36 @@ var KEY = "wazzup";
 var io = Socket();
 var clients = [];
 
-io.on('register', function (data){
-
-	var responce = {};
-
-	if (data.key == KEY)
-		responce = registerUser(data);
-	else
-		responce.err = "Access Key Denied";
-
-	this.to(data.cid).emit('confirm', responce);
-
+io.on('connect', function (){
+	console.log("Socket: Incomming Connection");
 });
 
-io.on('external-message', function (packet){
+io.sockets.on('connection', function (socket){
 
-	if (registeredUser(packet.key)) {
+	socket.on('register', function (data){
 
-		bot.sendMessage(bot.channels[0], packet.message);
-		
-	}
+		var responce = {};
 
-})
+		if (data.key == KEY)
+			responce = registerUser(data);
+		else
+			responce.err = "Access Key Denied";
+
+		this.to(data.cid).emit('confirm', responce);
+
+	});
+
+	socket.on('external-message', function (packet){
+
+		if (registeredUser(packet.key)) {
+
+			bot.sendMessage(bot.channels[0], packet.message);
+			
+		}
+
+	})
+
+});
 
 io.listen(3000);
 
