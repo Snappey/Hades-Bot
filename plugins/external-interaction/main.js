@@ -11,32 +11,37 @@ io.on('connect', function (){
 	console.log("Socket: Incomming Connection");
 });
 
-io.sockets.on('connection', function (socket){
+// io.sockets.on('connection', function (socket){
 
-	socket.on('register', function (data){
+io.on('register', function (data){
 
-		var responce = {};
+	var responce = {};
 
-		if (data.key == KEY)
-			responce = registerUser(data);
-		else
-			responce.err = "Access Key Denied";
+	console.log("Registering User:");
+	console.dir(data);
 
-		this.to(data.cid).emit('confirm', responce);
+	if (data.key == KEY)
+		responce = registerUser(data);
+	else {
+		responce.err = "Access Key Denied";
+		console.error("User Rejected");
+	}
 
-	});
-
-	socket.on('external-message', function (packet){
-
-		if (registeredUser(packet.key)) {
-
-			bot.sendMessage(bot.channels[0], packet.message);
-			
-		}
-
-	})
+	io.to(data.cid).emit('confirm', responce);
 
 });
+
+io.on('external-message', function (packet){
+
+	if (registeredUser(packet.key)) {
+
+		bot.sendMessage(bot.channels[0], packet.message);
+		
+	}
+
+});
+
+// });
 
 io.listen(3000);
 
