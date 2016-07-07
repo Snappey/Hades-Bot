@@ -11,37 +11,37 @@ io.on('connect', function (){
 	console.log("Socket: Incomming Connection");
 });
 
-// io.sockets.on('connection', function (socket){
+io.sockets.on('connection', function (socket){
 
-io.on('register', function (data){
+	socket.on('register', function (data){
 
-	var responce = {};
+		var responce = {};
 
-	console.log("Registering User:");
-	console.dir(data);
+		console.log("Registering User:");
+		console.dir(data);
 
-	if (data.key == KEY)
-		responce = registerUser(data);
-	else {
-		responce.err = "Access Key Denied";
-		console.error("User Rejected");
-	}
+		if (data.key == KEY)
+			responce = registerUser(data);
+		else {
+			responce.err = "Access Key Denied";
+			console.error("User Rejected");
+		}
 
-	io.to(data.cid).emit('confirm', responce);
+		io.to(data.cid).emit('confirm', responce);
+
+	});
+
+	socket.on('external-message', function (packet){
+
+		if (registeredUser(packet.key)) {
+
+			bot.sendMessage(bot.channels[0], packet.message);
+			
+		}
+
+	});
 
 });
-
-io.on('external-message', function (packet){
-
-	if (registeredUser(packet.key)) {
-
-		bot.sendMessage(bot.channels[0], packet.message);
-		
-	}
-
-});
-
-// });
 
 io.listen(3000);
 
@@ -50,7 +50,7 @@ function registerUser (user){
 	var clientKey = generateKey(10);
 	clients.push(clientKey);
 	return {
-		'err': false,
+		'err': 'none',
 		'key': clientKey
 	};
 
