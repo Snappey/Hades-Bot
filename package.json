@@ -10,8 +10,9 @@
     "cleverbot-node":  "^0.2.2",
     "node-schedule": "^1.1.0",
     "xml2js": "^0.4.16",
-    "routes": "2.1.0",
-    "http": "*"
+    "router": "1.1.4",
+    "http": "*",
+    "url": "0.11.0"
   },
   "devDependencies": {},
   "scripts": {
