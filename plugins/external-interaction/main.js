@@ -1,81 +1,8 @@
-var Socket	= require('socket.io');
+var http	= require('http');
 
-var chat	= require("../chat/main.js");
+var router	= require('./router');
 
-var KEY = "wazzup";
+http.createServer(router.route)
+.listen(3000);
 
-var io = Socket();
-var clients = [];
-
-io.on('connect', function (){
-	console.log("Socket: Incomming Connection");
-});
-
-// io.sockets.on('connection', function (socket){
-
-io.on('register', function (data){
-
-	var responce = {};
-
-	console.log("Registering User:");
-	console.dir(data);
-
-	if (data.key == KEY)
-		responce = registerUser(data);
-	else {
-		responce.err = "Access Key Denied";
-		console.error("User Rejected");
-	}
-
-	io.to(data.cid).emit('confirm', responce);
-
-});
-
-io.on('external-message', function (packet){
-
-	if (registeredUser(packet.key)) {
-
-		bot.sendMessage(bot.channels[0], packet.message);
-		
-	}
-
-});
-
-// });
-
-io.listen(3000);
-
-function registerUser (user){
-
-	var clientKey = generateKey(10);
-	clients.push(clientKey);
-	return {
-		'err': false,
-		'key': clientKey
-	};
-
-}
-
-function registeredUser (key){
-
-	for (keys in clients) {
-		if (key === keys)
-			return true;
-	}
-
-	return false;
-
-}
-
-function generateKey (length){
-
-	var key = "";
-
-	for (var i = 0; i < length; i++) {
-		var ascIndx = Math.floor(Math.random() * 25) + 65;
-		key 		+= String.fromCharCode(ascIndx);
-	}
-
-	return key;
-
-}
+console.log("API Running");
