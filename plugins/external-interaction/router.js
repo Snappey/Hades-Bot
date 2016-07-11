@@ -1,8 +1,10 @@
 var url			= require('url');
 var Router		= require('router');
+var path		= require('path');
 
-var handler		= require('./controls');
-var API			= require('./api');
+var appDir		= path.dirname(require.main.filename);
+var handler		= require(appDir + '/plugins/external-interaction/controls.js');
+var API			= require(appDir + '/plugins/external-interaction/api.js');
 
 var apiTree		= {
 	"v1" : {
