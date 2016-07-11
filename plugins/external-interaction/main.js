@@ -1,7 +1,9 @@
 var http	= require('http');
+var path 	= require('path');
 
-var router	= require('./router');
-var chat	= require('../chat/main');
+var appDir	= path.dirname(require.main.filename);
+var router	= require(appDir + '/plugins/external-interaction/router.js');
+var chat	= require( appDir + "/plugins/chat/main.js");
 
 chat.Add("heylisten", 0, function (){
 
