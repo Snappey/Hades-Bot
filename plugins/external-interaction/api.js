@@ -34,7 +34,6 @@ module.exports = function (handler, apiTree){
 			res.json = sendJSON;
 
 			var root = req.params.root;
-			console.log("ROOT: " + root);
 
 			if (root) {
 

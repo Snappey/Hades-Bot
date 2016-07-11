@@ -49,6 +49,7 @@ function externalMessage (res, req){
 
 	if (registeredUser(packet.key)) {
 		bot.sendMessage(bot.channels[0], packet.message);
+		res.send("Message Sent");
 	} else {
 		throw new {
 			'error' : "User with key " + packet.key + " not registered",
