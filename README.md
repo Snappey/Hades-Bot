@@ -7,4 +7,4 @@ Used in Hades-Soft Discord chat
 
 - Cleanup require code
 
-- Webhook testing more
+- Webhook testing
