@@ -78,7 +78,7 @@ bot.on("ready", function() {
   // bot.sendMessage(bot.channels[0], "Whats Up!");
 });
 
-var _prfx = []; _prfx["/"] = true; _prfx["!"] = true; _prfx["~"] = true; // TODO: Make them configurable from the client
+var _prfx = []; _prfx["/"] = true; _prfx["!"] = true; _prfx["~"] = true;
 bot.on("message", function(message) {
     if (message.sender.username == bot.user.username) { return; }
     if (_prfx[message.content.substring(0,1)] == true) {
